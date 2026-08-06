@@ -14,4 +14,4 @@ export const metadata:Metadata={
   twitter:{card:"summary_large_image",images:["/og-cyan.png"]},
 };
 
-export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body className={`${sans.variable} ${mono.variable}`}>{children}</body></html>}
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><head><script async src="https://www.googletagmanager.com/gtag/js?id=G-4L3DNF1KRW"/><script dangerouslySetInnerHTML={{__html:`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-4L3DNF1KRW');`}}/></head><body className={`${sans.variable} ${mono.variable}`}>{children}</body></html>}
