@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Quasimorph Wiki Updates</title>
+    <link>https://quasimorphwiki.com/updates/</link>
+    <description>Verified Quasimorph 1.0 release notes and site data updates.</description>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 06 Aug 2026 10:00:00 GMT</lastBuildDate>
+    <item>
+      <title>Quasimorph 1.0 launch coverage</title>
+      <link>https://quasimorphwiki.com/updates/patch-1-0/</link>
+      <guid>https://quasimorphwiki.com/updates/patch-1-0/</guid>
+      <pubDate>Thu, 06 Aug 2026 10:00:00 GMT</pubDate>
+      <description>Confirmed release scope: five storylines, nine endings, 142 Pacts, achievements, and Map Editor.</description>
+    </item>
+  </channel>
+</rss>
