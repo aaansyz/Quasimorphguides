@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- screenshots are pre-optimized local WebP assets */
 import { achievements } from "./achievement-data";
 import { DamageLookup, MissionPlanner, StoryPlanner } from "./tool-suite";
 import { gameVersion, nav, PageEntry, verifiedAt } from "./site-data";
@@ -44,4 +45,43 @@ function AchievementTable(){return <section className="achievement-section"><div
 
 export function AdSlot(){return <aside className="ad-slot" aria-label="Reserved advertisement area"><span>ADVERTISEMENT // RESERVED</span><p>No ad is loaded in this launch build.</p></aside>}
 
-export function HomePage(){return <Shell><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({"@context":"https://schema.org","@type":"WebSite","@id":"https://quasimorphwiki.com/#website",name:"Quasimorph Wiki",url:"https://quasimorphwiki.com/",description:"Unofficial Quasimorph 1.0 guides, tools, builds, and verified data."})}}/><section className="home-hero"><div className="hero-copy"><div className="hero-status"><span>QUASIMORPH // VERSION 1.0</span><i>DATA CHANNEL ONLINE</i></div><h1>Survive the contract.<br/><em>Keep the data.</em></h1><p>Quasimorph 1.0 guides, builds, browser-local tools, and verified data for mercenaries who prefer evidence over guesswork.</p><div className="hero-actions"><a className="button primary" href="/guides/getting-started/">BEGINNER GUIDE <span>↗</span></a><a className="button" href="/tools/mission-prep/">MISSION PREP <span>→</span></a></div><div className="trust-row"><span><b>01</b>OFFICIAL SOURCES FIRST</span><span><b>02</b>VERSION-STAMPED DATA</span><span><b>03</b>NO LIVE AI</span></div></div><div className="orbital" aria-hidden="true"><div className="planet"></div><div className="orbit one"></div><div className="orbit two"></div><div className="target">QW<br/><span>1.0</span></div><div className="telemetry">SECTOR // INNER SYSTEM<br/>SIGNAL // STABLE<br/>ARCHIVE // SYNCED</div></div></section><div className="home-wrap"><MetaBar status="Partial coverage"/><section className="quick-grid"><a href="/guides/getting-started/" className="feature-card lead"><span>01 // START HERE</span><h2>Beginner<br/>field manual</h2><p>A survival-first route from the tutorial to a stable contract loop.</p><b>OPEN GUIDE ↗</b></a><a href="/tools/mission-prep/" className="feature-card"><span>02 // LOCAL TOOL</span><div className="mini-terminal"><i></i><i></i><i></i><strong>MISSION BRIEF</strong><p>THREAT ██████░░</p><p>SUPPLY ███████░</p></div><h3>Mission Prep Planner</h3><p>Turn eight mission inputs into a conservative deployment checklist.</p><b>BUILD A PLAN →</b></a><a href="/tools/damage-resistance/" className="feature-card"><span>03 // VERIFIED DATA</span><div className="bars"><i style={{width:"84%"}}></i><i style={{width:"61%"}}></i><i style={{width:"42%"}}></i><i style={{width:"73%"}}></i></div><h3>Damage Lookup</h3><p>Filter what is verified. See exactly where coverage stops.</p><b>QUERY DATA →</b></a><a href="/updates/patch-1-0/" className="feature-card update-card"><span>04 // RELEASE INTEL</span><strong>1.0</strong><h3>Five storylines.<br/>Nine endings.</h3><p>Official release scope, separated from community interpretation.</p><b>READ UPDATE →</b></a></section><section className="principles"><div><span className="kicker">EDITORIAL PROTOCOL</span><h2>Every claim has a status.</h2></div><div className="protocol-list"><div><i className="green"></i><span><b>OFFICIAL FACT</b><small>Steam, developer notes, or official reference</small></span></div><div><i className="amber"></i><span><b>COMMUNITY TIP</b><small>Attributed, useful, never promoted to fact</small></span></div><div><i className="red"></i><span><b>VERIFICATION PENDING</b><small>Unknown means unknown—no invented details</small></span></div></div></section><section className="home-guides"><div className="section-head"><span className="kicker">LATEST FIELD GUIDES</span><h2>Answers built for the next decision.</h2><a href="/guides/">VIEW ALL GUIDES →</a></div><div className="guide-list">{[["What to do after the tutorial","/guides/after-tutorial/","BEGINNER"],["Choosing contracts without losing the run","/guides/choosing-contracts/","PLANNING"],["Quasimorphosis, explained safely","/guides/quasimorphosis/","MECHANICS"],["Who gets AnCom’s Secret Data?","/guides/secret-data/","STORY"]].map((g,i)=><a key={g[1]} href={g[1]}><span>{String(i+1).padStart(2,"0")}</span><b>{g[0]}</b><em>{g[2]}</em><i>↗</i></a>)}</div></section><AdSlot/></div></Shell>}
+const officialMedia = [
+  { src: "/images/official/augmentation.webp", alt: "Quasimorph augmentation and implant interface", label: "AUGMENTATION // LOADOUT" },
+  { src: "/images/official/mars-contract.webp", alt: "A Quasimorph operative beginning a contract in a hostile industrial zone", label: "CONTRACT // HOSTILE ZONE" },
+  { src: "/images/official/combat.webp", alt: "Turn-based combat around a heavy vehicle in Quasimorph", label: "TACTICAL COMBAT // LIVE" },
+];
+
+export function HomePage(){
+  return <Shell>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({"@context":"https://schema.org","@type":"WebSite","@id":"https://quasimorphwiki.com/#website",name:"Quasimorph Wiki",url:"https://quasimorphwiki.com/",description:"Unofficial Quasimorph 1.0 guides, tools, builds, and verified data."})}}/>
+    <section className="home-hero">
+      <div className="hero-copy">
+        <div className="hero-status"><span>QUASIMORPH // VERSION 1.0</span><i>DATA CHANNEL ONLINE</i></div>
+        <h1>Survive the contract.<br/><em>Keep the data.</em></h1>
+        <p>Quasimorph 1.0 guides, builds, browser-local tools, and verified data for mercenaries who prefer evidence over guesswork.</p>
+        <div className="hero-actions"><a className="button primary" href="/guides/getting-started/">BEGINNER GUIDE <span>↗</span></a><a className="button" href="/tools/mission-prep/">MISSION PREP <span>→</span></a></div>
+        <div className="trust-row"><span><b>01</b>OFFICIAL SOURCES FIRST</span><span><b>02</b>VERSION-STAMPED DATA</span><span><b>03</b>NO LIVE AI</span></div>
+      </div>
+      <figure className="official-hero">
+        <img src="/images/official/tactical-contract.webp" alt="An official Quasimorph gameplay screenshot showing a tactical contract in progress" width="1280" height="720" fetchPriority="high"/>
+        <figcaption><span>OFFICIAL GAME MEDIA</span><b>TACTICAL CONTRACT // LIVE</b><small>Source: Quasimorph Steam Store</small></figcaption>
+      </figure>
+    </section>
+    <div className="home-wrap">
+      <MetaBar status="Partial coverage"/>
+      <section className="quick-grid">
+        <a href="/guides/getting-started/" className="feature-card lead"><span>01 // START HERE</span><h2>Beginner<br/>field manual</h2><p>A survival-first route from the tutorial to a stable contract loop.</p><b>OPEN GUIDE ↗</b></a>
+        <a href="/tools/mission-prep/" className="feature-card"><span>02 // LOCAL TOOL</span><div className="mini-terminal"><i></i><i></i><i></i><strong>MISSION BRIEF</strong><p>THREAT ██████░░</p><p>SUPPLY ███████░</p></div><h3>Mission Prep Planner</h3><p>Turn eight mission inputs into a conservative deployment checklist.</p><b>BUILD A PLAN →</b></a>
+        <a href="/tools/damage-resistance/" className="feature-card"><span>03 // VERIFIED DATA</span><div className="bars"><i style={{width:"84%"}}></i><i style={{width:"61%"}}></i><i style={{width:"42%"}}></i><i style={{width:"73%"}}></i></div><h3>Damage Lookup</h3><p>Filter what is verified. See exactly where coverage stops.</p><b>QUERY DATA →</b></a>
+        <a href="/updates/patch-1-0/" className="feature-card update-card"><span>04 // RELEASE INTEL</span><strong>1.0</strong><h3>Five storylines.<br/>Nine endings.</h3><p>Official release scope, separated from community interpretation.</p><b>READ UPDATE →</b></a>
+      </section>
+      <section className="official-media">
+        <div className="section-head"><span className="kicker">OFFICIAL GAME MEDIA</span><h2>Inside the corporate meat grinder.</h2><a href="https://store.steampowered.com/app/2059170/Quasimorph/">VIEW ON STEAM ↗</a></div>
+        <div className="media-grid">{officialMedia.map((item)=><figure key={item.src}><img src={item.src} alt={item.alt} width="1280" height="720" loading="lazy"/><figcaption><span>{item.label}</span><small>Official screenshot © Magnum Scriptum / HypeTrain Digital</small></figcaption></figure>)}</div>
+      </section>
+      <section className="principles"><div><span className="kicker">EDITORIAL PROTOCOL</span><h2>Every claim has a status.</h2></div><div className="protocol-list"><div><i className="green"></i><span><b>OFFICIAL FACT</b><small>Steam, developer notes, or official reference</small></span></div><div><i className="amber"></i><span><b>COMMUNITY TIP</b><small>Attributed, useful, never promoted to fact</small></span></div><div><i className="red"></i><span><b>VERIFICATION PENDING</b><small>Unknown means unknown—no invented details</small></span></div></div></section>
+      <section className="home-guides"><div className="section-head"><span className="kicker">LATEST FIELD GUIDES</span><h2>Answers built for the next decision.</h2><a href="/guides/">VIEW ALL GUIDES →</a></div><div className="guide-list">{[["What to do after the tutorial","/guides/after-tutorial/","BEGINNER"],["Choosing contracts without losing the run","/guides/choosing-contracts/","PLANNING"],["Quasimorphosis, explained safely","/guides/quasimorphosis/","MECHANICS"],["Who gets AnCom’s Secret Data?","/guides/secret-data/","STORY"]].map((g,i)=><a key={g[1]} href={g[1]}><span>{String(i+1).padStart(2,"0")}</span><b>{g[0]}</b><em>{g[2]}</em><i>↗</i></a>)}</div></section>
+      <AdSlot/>
+    </div>
+  </Shell>
+}
