@@ -31,6 +31,8 @@ export function ArticlePage({page}:{page:PageEntry}) {
   return <Shell><StructuredData page={page}/><div className="page-wrap"><Breadcrumbs path={page.path} title={page.title}/><section className="article-hero"><div><span className="kicker">{page.eyebrow}</span><h1>{page.title}</h1><p>{page.description}</p></div><div className="scope-card"><span>ARCHIVE RECORD</span><b>{page.status}</b><small>Scope: Quasimorph {gameVersion}<br/>Reviewed: {verifiedAt}</small></div></section><MetaBar status={page.status}/>
     {page.spoiler&&<div className="callout warning"><b>SPOILER CONTROL</b><p>This page discusses story routes. Exact outcomes are limited or masked where noted.</p></div>}
     <div className="answer"><span>DIRECT ANSWER</span><p>{page.answer}</p></div>
+    {page.sourceNote&&<aside className="transcript-note"><span>EDITORIAL NOTE // COMMUNITY TRANSCRIPTS</span><p>{page.sourceNote}</p></aside>}
+    {page.path==="/guides/getting-started/"&&<BeginnerRoute/>}
     {page.tool&&<div className="tool-mount">{page.tool==="mission"?<MissionPlanner/>:page.tool==="damage"?<DamageLookup/>:<StoryPlanner/>}</div>}
     {page.sections.map((section,i)=><section className="content-section" key={section.title}><div className="section-index">{String(i+1).padStart(2,"0")}</div><div><h2>{section.title}</h2><p>{section.body}</p>{section.bullets&&<ul>{section.bullets.map(x=><li key={x}>{x}</li>)}</ul>}</div></section>)}
     {page.path==="/achievements/"&&<AchievementTable/>}
@@ -39,6 +41,16 @@ export function ArticlePage({page}:{page:PageEntry}) {
     <AdSlot/>
     <section className="sources"><div><span className="kicker">PROVENANCE</span><h2>Sources & verification</h2><p>Important claims are separated from editorial safety guidance. Patch-sensitive details are omitted when current evidence is incomplete.</p></div><div>{page.sources?.map(s=><a href={s.url} key={s.url}><span>{s.type}</span><b>{s.label}</b><small>Accessed {verifiedAt} ↗</small></a>)||<p className="pending">No external factual claims on this page.</p>}</div></section>
   </div></Shell>;
+}
+
+function BeginnerRoute(){
+  const phases=[
+    ["00–02H","LEARN","Tutorial, controls, extraction"],
+    ["02–08H","STABILIZE","Mars contracts, three spare kits"],
+    ["08–20H","EXPAND","Ship upgrades, chips, reputation"],
+    ["20H+","SPECIALIZE","Story, implants, hard objectives"],
+  ];
+  return <section className="beginner-route" aria-labelledby="route-title"><div className="route-heading"><span className="kicker">CAMPAIGN ROUTE</span><h2 id="route-title">From disposable clone to stable operation.</h2><p>Move forward when the current phase funds the next one—not when the clock says so.</p></div><div className="phase-grid">{phases.map((phase,i)=><div key={phase[0]}><span>{phase[0]}</span><b>{String(i+1).padStart(2,"0")} / {phase[1]}</b><p>{phase[2]}</p></div>)}</div><div className="loop-strip"><b>CONTRACT</b><i>→</i><b>EXTRACT</b><i>→</i><b>RESTOCK</b><i>→</i><b>UPGRADE</b><i>↺</i></div></section>
 }
 
 function AchievementTable(){return <section className="achievement-section"><div className="table-summary"><div><span>VERIFIED COUNT</span><b>{achievements.length}</b></div><p>Names, public descriptions, and snapshot unlock rates from Steam. Hidden descriptions remain labeled, not guessed.</p></div><div className="table-wrap"><table><thead><tr><th>#</th><th>Achievement</th><th>Steam description</th><th>Global unlock</th></tr></thead><tbody>{achievements.map((a,i)=><tr key={a[0]}><td>{String(i+1).padStart(2,"0")}</td><td><b>{a[0]}</b></td><td>{a[1]}</td><td><em className="signal conditional">{a[2]}</em></td></tr>)}</tbody></table></div></section>}
