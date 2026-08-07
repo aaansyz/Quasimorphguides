@@ -4,7 +4,7 @@ import { DamageLookup, MissionPlanner, StoryPlanner } from "./tool-suite";
 import { gameVersion, nav, PageEntry, verifiedAt } from "./site-data";
 
 export function Header() {
-  return <><div className="unofficial"><span>UNOFFICIAL FAN WIKI</span><p>Not affiliated with Magnum Scriptum or HypeTrain Digital</p></div><header className="site-header"><a href="/" className="brand" aria-label="Quasimorph Wiki home"><span className="brand-mark">Q</span><span><b>QUASIMORPH</b><small>WIKI // FIELD ARCHIVE</small></span></a><nav aria-label="Main navigation">{nav.map((item)=><a key={item.href} href={item.href}>{item.label}</a>)}</nav><details className="mobile-nav"><summary aria-label="Open navigation">MENU</summary><div>{nav.map((item)=><a key={item.href} href={item.href}>{item.label}</a>)}</div></details></header></>;
+  return <><div className="unofficial"><span>UNOFFICIAL COMMUNITY WIKI</span></div><header className="site-header"><a href="/" className="brand" aria-label="Quasimorph Wiki home"><span className="brand-mark">Q</span><span><b>QUASIMORPH</b><small>WIKI // FIELD ARCHIVE</small></span></a><nav aria-label="Main navigation">{nav.map((item)=><a key={item.href} href={item.href}>{item.label}</a>)}</nav><details className="mobile-nav"><summary aria-label="Open navigation">MENU</summary><div>{nav.map((item)=><a key={item.href} href={item.href}>{item.label}</a>)}</div></details></header></>;
 }
 
 export function Footer() {
@@ -28,6 +28,7 @@ function StructuredData({page}:{page:PageEntry}) {
 }
 
 export function ArticlePage({page}:{page:PageEntry}) {
+  if(page.path==="/guides/") return <GuidesHubPage page={page}/>;
   return <Shell><StructuredData page={page}/><div className="page-wrap"><Breadcrumbs path={page.path} title={page.title}/><section className="article-hero"><div><span className="kicker">{page.eyebrow}</span><h1>{page.title}</h1><p>{page.description}</p></div><div className="scope-card"><span>ARCHIVE RECORD</span><b>{page.status}</b><small>Scope: Quasimorph {gameVersion}<br/>Reviewed: {verifiedAt}</small></div></section><MetaBar status={page.status}/>
     {page.spoiler&&<div className="callout warning"><b>SPOILER CONTROL</b><p>This page discusses story routes. Exact outcomes are limited or masked where noted.</p></div>}
     <div className="answer"><span>DIRECT ANSWER</span><p>{page.answer}</p></div>
@@ -41,6 +42,45 @@ export function ArticlePage({page}:{page:PageEntry}) {
     <AdSlot/>
     <section className="sources"><div><span className="kicker">PROVENANCE</span><h2>Sources & verification</h2><p>Important claims are separated from editorial safety guidance. Patch-sensitive details are omitted when current evidence is incomplete.</p></div><div>{page.sources?.map(s=><a href={s.url} key={s.url}><span>{s.type}</span><b>{s.label}</b><small>Accessed {verifiedAt} ↗</small></a>)||<p className="pending">No external factual claims on this page.</p>}</div></section>
   </div></Shell>;
+}
+
+const hubPhases=[
+  ["00–02H","LEARN","Finish the tutorial. Practice action points, wounds, reloading, and the route back to extraction."],
+  ["02–08H","STABILIZE","Run readable Mars contracts and bank enough food, medicine, ammunition, and gear for three kits."],
+  ["08–20H","EXPAND","Improve navigation and supply, collect chips, trade around Earth, and protect campaign variety."],
+  ["20H+","SPECIALIZE","Choose story routes, harder objectives, item projects, augmentations, and implants on your terms."],
+];
+
+const hubTopics=[
+  ["01","START HERE","Complete beginner field manual","Settings, first contracts, loadouts, Mars, factions, trade, loot, and the transition to mid-game.","/guides/getting-started/"],
+  ["02","FIRST HOUR","After the tutorial","Turn the tutorial kit into a repeatable reserve instead of gambling on a perfect first run.","/guides/after-tutorial/"],
+  ["03","PLANNING","Choosing contracts","Judge sides, technology, power per floor, layouts, rewards, and political consequences.","/guides/choosing-contracts/"],
+  ["04","COMBAT","Stances & action points","Preserve options, control sight lines, and stop ending turns in positions that cannot be recovered.","/guides/combat-stances/"],
+  ["05","SURVIVAL","Wounds & medicine","Stabilize lethal problems first and know when treatment has consumed the reserve needed to leave.","/guides/wounds-medicine/"],
+  ["06","ANOMALY","Quasimorphosis explained","Treat the meter as a changing mission condition and prepare a fallback for unfamiliar enemies.","/guides/quasimorphosis/"],
+  ["07","STORY","AnCom’s Secret Data","Understand the route decision before giving away a campaign-defining quest item.","/guides/secret-data/"],
+];
+
+function GuidesHubPage({page}:{page:PageEntry}){
+  return <Shell><StructuredData page={page}/><div className="page-wrap guides-hub"><Breadcrumbs path={page.path} title={page.title}/>
+    <section className="guides-hub-hero"><div><span className="kicker">OPERATIONS MANUAL // VERSION {gameVersion}</span><h1>Learn the loop.<br/><em>Survive the system.</em></h1><p>A practical route from your first disposable clone to a stable campaign—plus focused guides for every decision that usually ends a new run.</p><div className="hero-actions"><a className="button primary" href="/guides/getting-started/">START THE FULL GUIDE <span>↗</span></a><a className="button" href="/tools/mission-prep/">PREP A MISSION <span>→</span></a></div></div>
+      <aside className="hub-brief"><span>FIELD ARCHIVE // ONLINE</span><b>11</b><strong>BEGINNER CHAPTERS</strong><div><small>ROUTE</small><p>Tutorial → Mars → Earth → Mid-game</p></div><div><small>CORE LOOP</small><p>Contract → Extract → Restock → Upgrade</p></div><a href="/guides/getting-started/">OPEN 0–20H MANUAL ↗</a></aside>
+    </section><MetaBar status={page.status}/>
+
+    <section className="hub-route"><div className="hub-section-head"><span className="kicker">0–20 HOUR ROUTE</span><h2>One campaign, four operating phases.</h2><p>The hour marks are orientation, not gates. Move on when the current phase can reliably fund the next.</p></div><div className="hub-phase-grid">{hubPhases.map((phase,i)=><article key={phase[0]}><span>{phase[0]}</span><b>{String(i+1).padStart(2,"0")} / {phase[1]}</b><p>{phase[2]}</p></article>)}</div></section>
+
+    <section className="hub-core"><a className="hub-manual-card" href="/guides/getting-started/"><span>THE COMPLETE BEGINNER FIELD MANUAL</span><h2>Everything the first campaign fails to explain.</h2><p>Eleven detailed chapters distilled from the supplied 1.0 video transcripts, rewritten as a sequence you can actually follow.</p><div className="hub-tags"><i>SETTINGS</i><i>LOADOUT</i><i>MARS</i><i>FACTIONS</i><i>SHIP</i><i>LOOT</i><i>TRADE</i></div><b>READ THE FULL GUIDE ↗</b></a>
+      <div className="hub-contract-card"><span>CONTRACT // GO–NO-GO</span><h3>Do not trust skulls alone.</h3><ol><li><b>SIDES</b><small>Beneficiary, victim, and long-term faction cost</small></li><li><b>THREAT</b><small>Technology, units, damage types, power per floor</small></li><li><b>ATTRITION</b><small>Floors, layout, quasimorphosis, food, durability</small></li><li><b>VALUE</b><small>Objective, facility loot, reward, credit, travel time</small></li></ol><a href="/guides/choosing-contracts/">OPEN CONTRACT GUIDE →</a></div>
+    </section>
+
+    <section className="hub-priorities"><div className="hub-section-head"><span className="kicker">EARLY PRIORITIES</span><h2>Build game flow before prestige.</h2></div><div className="priority-grid"><article><span>SHIP UPGRADES</span><ol><li><b>01</b><p><strong>Navigation & monitoring</strong>More contracts, better scanning, clearer choices.</p></li><li><b>02</b><p><strong>Supply & scavengers</strong>Food, medicine, ammunition, and replacement gear.</p></li><li><b>03</b><p><strong>Capsule & hangar</strong>Protect valuable loot and reduce the cost of failure.</p></li></ol></article><article><span>LOOT ORDER</span><ol><li><b>01</b><p><strong>Chips, data, upgrade materials</strong>Anything that unlocks permanent capability.</p></li><li><b>02</b><p><strong>Crates, medical packs, rare parts</strong>Open or bank them according to the current bottleneck.</p></li><li><b>03</b><p><strong>Turrets, drones, spare kits</strong>Take them when a real mission plan needs them.</p></li></ol></article></div></section>
+
+    <section className="hub-library"><div className="hub-section-head"><span className="kicker">FIELD GUIDE LIBRARY</span><h2>Go directly to the decision in front of you.</h2><p>Start with the manual, then use focused records when one system becomes the current bottleneck.</p></div><div className="hub-topic-grid">{hubTopics.map(topic=><a href={topic[4]} key={topic[0]}><span>{topic[0]} / {topic[1]}</span><h3>{topic[2]}</h3><p>{topic[3]}</p><b>OPEN RECORD ↗</b></a>)}</div></section>
+
+    <section className="hub-preflight"><div><span className="kicker">PRE-DEPLOYMENT RULE</span><h2>A contract is not profitable until the loot reaches safety.</h2></div><ul><li>Primary weapon plus a fallback that fails differently</li><li>Compatible ammunition and enough food for every floor</li><li>Medicine for the likely wounds and status effects</li><li>Protection matched to the opponent, not a generic tier list</li><li>A retreat trigger decided before the first door opens</li></ul><a className="button primary" href="/tools/mission-prep/">BUILD A CHECKLIST <span>→</span></a></section>
+    <AdSlot/>
+    <section className="sources"><div><span className="kicker">PROVENANCE</span><h2>Sources & verification</h2><p>The new-player route synthesizes community transcripts supplied by the site owner. Named builds remain recommendations; patch-sensitive claims are checked against current official references where possible.</p></div><div>{page.sources?.map(s=><a href={s.url} key={s.url}><span>{s.type}</span><b>{s.label}</b><small>Accessed {verifiedAt} ↗</small></a>)}</div></section>
+  </div></Shell>
 }
 
 function BeginnerRoute(){
