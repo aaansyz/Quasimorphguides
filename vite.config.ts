@@ -15,7 +15,7 @@ const localBindingConfig = {
   main: "./worker/index.ts",
   compatibility_flags: ["nodejs_compat"],
   assets: {
-    not_found_handling: "none",
+    not_found_handling: "none" as const,
     run_worker_first: ["/google69e31fdccca0bb4a.html"],
   },
   d1_databases: d1

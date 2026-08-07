@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { HomePage } from "./components";
 
 export const metadata: Metadata = {
-  title: { absolute: "Quasimorph Wiki — 1.0 Guides, Tools & Verified Data" },
-  description: "Unofficial Quasimorph 1.0 guides, builds, local planning tools, achievements, updates, and source-visible player data.",
+  title: { absolute: "Quasimorph Wiki — 1.0 Guides & Planning Tools" },
+  description: "Task-focused Quasimorph 1.0 guides, a local mission planner, all 82 achievements and verified update coverage.",
   alternates: { canonical: "/" },
 };
 

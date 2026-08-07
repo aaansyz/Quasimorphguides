@@ -1,0 +1,10 @@
+{
+  "steam-store":{"label":"Quasimorph on Steam","url":"https://store.steampowered.com/app/2059170/Quasimorph/","tier":"A","type":"official"},
+  "steam-patch-1-0":{"label":"Official Quasimorph 1.0 patch notes","url":"https://store.steampowered.com/news/app/2059170/view/667246521005114967","tier":"A","type":"official"},
+  "steam-announcements":{"label":"Official Steam announcements","url":"https://steamcommunity.com/app/2059170/announcements/","tier":"A","type":"official"},
+  "official-wiki":{"label":"Official Quasimorph Wiki","url":"https://quasimorph.wiki.gg/","tier":"A-reference","type":"official-wiki"},
+  "wiki-ship-upgrades":{"label":"Official Wiki: Ship Upgrades","url":"https://quasimorph.wiki.gg/wiki/Ship_Upgrades","tier":"A-reference","type":"official-wiki"},
+  "wiki-augmentations":{"label":"Official Wiki: Augmentations and implants","url":"https://quasimorph.wiki.gg/wiki/Augmentations_and_implants","tier":"A-reference","type":"official-wiki"},
+  "steam-achievements":{"label":"Steam Global Achievements","url":"https://steamcommunity.com/stats/2059170/achievements/","tier":"A","type":"official"},
+  "steam-workshop":{"label":"Quasimorph Steam Workshop","url":"https://steamcommunity.com/app/2059170/workshop/","tier":"A","type":"official"}
+}

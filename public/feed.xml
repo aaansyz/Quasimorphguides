@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
-  <channel>
-    <title>Quasimorph Wiki Updates</title>
-    <link>https://quasimorphwiki.com/updates/</link>
-    <description>Verified Quasimorph 1.0 release notes and site data updates.</description>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 06 Aug 2026 10:00:00 GMT</lastBuildDate>
-    <item>
-      <title>Quasimorph 1.0 launch coverage</title>
-      <link>https://quasimorphwiki.com/updates/patch-1-0/</link>
-      <guid>https://quasimorphwiki.com/updates/patch-1-0/</guid>
-      <pubDate>Thu, 06 Aug 2026 10:00:00 GMT</pubDate>
-      <description>Confirmed release scope: five storylines, nine endings, 142 Pacts, achievements, and Map Editor.</description>
-    </item>
-  </channel>
-</rss>
+<rss version="2.0"><channel><title>Quasimorph Wiki Updates</title><link>https://quasimorphwiki.com/updates/</link><description>Verified Quasimorph 1.0 release and content updates.</description><language>en-us</language>
+    <item><title>Quasimorph 1.0 Patch Notes Summary</title><link>https://quasimorphwiki.com/updates/patch-1-0/</link><guid>https://quasimorphwiki.com/updates/patch-1-0/</guid><pubDate>Fri, 07 Aug 2026 12:00:00 GMT</pubDate><description>An official-source summary with affected guides and data areas.</description></item>
+    <item><title>Quasimorph Roadmap After Version 1.0</title><link>https://quasimorphwiki.com/updates/roadmap/</link><guid>https://quasimorphwiki.com/updates/roadmap/</guid><pubDate>Fri, 07 Aug 2026 12:00:00 GMT</pubDate><description>A confirmed, planned and unknown timeline from official announcements.</description></item>
+    <item><title>Quasimorph Achievements Tracker — All 82</title><link>https://quasimorphwiki.com/achievements/</link><guid>https://quasimorphwiki.com/achievements/</guid><pubDate>Fri, 07 Aug 2026 12:00:00 GMT</pubDate><description>A searchable local completion tracker using Steam’s public achievement list.</description></item>
+  </channel></rss>

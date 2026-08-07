@@ -1,3 +1,5 @@
+import { p0Pages } from "../content/p0-pages";
+
 export type PageEntry = {
   path: string;
   title: string;
@@ -85,7 +87,7 @@ const guidePages: PageEntry[] = guides.map(([path, title, answer, description, b
     links: [{ label: "Mission Prep Planner", href: "/tools/mission-prep/", note: "Build a local pre-deployment checklist." }, { label: "Damage Lookup", href: "/tools/damage-resistance/", note: "Check the verified coverage table." }], sources: [sources.news, sources.wiki], status: "Partial coverage" };
 });
 
-export const pages: PageEntry[] = [
+const legacyPages: PageEntry[] = [
   {
     path: "/guides/", title: "Quasimorph 1.0 Guides", eyebrow: "GUIDES HUB", description: "Direct answers for early contracts, combat decisions, wounds, quasimorphosis, and story routing.", answer: "Start with the beginner route, then use the planner before every unfamiliar contract.",
     sections: [{ title: "A route through the learning curve", body: "These guides focus on repeatable decisions instead of brittle tier lists.", bullets: safe }],
@@ -185,6 +187,13 @@ export const pages: PageEntry[] = [
     path: "/disclaimer/", title: "Unofficial Fan Site Disclaimer", eyebrow: "LEGAL", description: "Trademark, affiliation, and accuracy disclaimer for QuasimorphWiki.com.", answer: "QuasimorphWiki.com is an unofficial fan-made resource and is not affiliated with or endorsed by Magnum Scriptum or HypeTrain Digital.", sections: [{ title: "Names and marks", body: "Quasimorph and related names are the property of their respective owners. This site uses no official logo to present itself as an official product." }, { title: "Sources and accuracy", body: "Facts are independently summarized and linked to their sources. Game updates can change mechanics, rewards, and conditions after our verification date." }], sources: [sources.store], status: "Verified"
   },
 ];
+
+// Later records replace legacy launch pages at the same path. This keeps the
+// large transcript-derived beginner manual while allowing researched V2 pages
+// to live outside the routing/data file.
+export const pages: PageEntry[] = Array.from(
+  new Map([...legacyPages, ...p0Pages].map((page) => [page.path, page])).values(),
+);
 
 export const pageByPath = new Map(pages.map((page) => [page.path, page]));
 
