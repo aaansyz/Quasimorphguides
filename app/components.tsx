@@ -1,4 +1,4 @@
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element -- screenshots use checked-in responsive WebP derivatives */
 import { AchievementTracker } from "./achievement-tracker";
 import { MissionPlanner } from "./mission-planner";
 import { DamageLookup, StoryPlanner } from "./tool-suite";
@@ -153,7 +153,7 @@ export function HomePage(){
         <div className="trust-row"><span><b>01</b>OFFICIAL SOURCES FIRST</span><span><b>02</b>VERSION-STAMPED DATA</span><span><b>03</b>NO LIVE AI</span></div>
       </div>
       <figure className="official-hero">
-        <Image src="/images/official/tactical-contract.webp" alt="An official Quasimorph gameplay screenshot showing a tactical contract in progress" width={1280} height={720} priority sizes="(max-width: 860px) 100vw, 50vw"/>
+        <img src="/images/official/tactical-contract.webp" srcSet="/images/official/tactical-contract-640.webp 640w, /images/official/tactical-contract-960.webp 960w, /images/official/tactical-contract.webp 1280w" sizes="(max-width: 860px) 100vw, 50vw" alt="An official Quasimorph gameplay screenshot showing a tactical contract in progress" width="1280" height="720" fetchPriority="high"/>
         <figcaption><span>OFFICIAL GAME MEDIA</span><b>TACTICAL CONTRACT // LIVE</b><small>Source: Quasimorph Steam Store</small></figcaption>
       </figure>
     </section>
@@ -170,7 +170,7 @@ export function HomePage(){
       <section className="version-snapshot"><div><span>VERSION SNAPSHOT</span><b>1.0</b><p>Released July 31, 2026</p></div><div><span>OFFICIAL SCOPE</span><b>82</b><p>Steam achievements tracked locally</p></div><div><span>SITE BOUNDARY</span><b>0</b><p>Empty databases exposed in navigation</p></div><a href="/updates/patch-1-0/">READ THE VERIFIED RELEASE BRIEF →</a></section>
       <section className="official-media">
         <div className="section-head"><span className="kicker">OFFICIAL GAME MEDIA</span><h2>Inside the corporate meat grinder.</h2><a href="https://store.steampowered.com/app/2059170/Quasimorph/">VIEW ON STEAM ↗</a></div>
-        <div className="media-grid">{officialMedia.map((item)=><figure key={item.src}><Image src={item.src} alt={item.alt} width={1280} height={720} loading="lazy" sizes="(max-width: 760px) 100vw, 33vw"/><figcaption><span>{item.label}</span><small>Official screenshot © Magnum Scriptum / HypeTrain Digital</small></figcaption></figure>)}</div>
+        <div className="media-grid">{officialMedia.map((item)=>{const base=item.src.replace(/\.webp$/,""); return <figure key={item.src}><img src={item.src} srcSet={`${base}-640.webp 640w, ${base}-960.webp 960w, ${item.src} 1280w`} sizes="(max-width: 760px) 100vw, 33vw" alt={item.alt} width="1280" height="720" loading="lazy"/><figcaption><span>{item.label}</span><small>Official screenshot © Magnum Scriptum / HypeTrain Digital</small></figcaption></figure>})}</div>
       </section>
       <details className="principles editorial-details"><summary><span className="kicker">EDITORIAL PROTOCOL</span><b>How claims, versions and corrections are handled</b><em>OPEN +</em></summary><div className="protocol-list"><div><i className="green"></i><span><b>OFFICIAL FACT</b><small>Steam, developer notes, or official reference</small></span></div><div><i className="amber"></i><span><b>COMMUNITY TIP</b><small>Attributed, useful, never promoted to fact</small></span></div><div><i className="red"></i><span><b>VERIFICATION PENDING</b><small>Unknown means unknown—draft pages remain out of search and sitemap</small></span></div></div></details>
       <section className="home-guides"><div className="section-head"><span className="kicker">POPULAR LOOKUPS</span><h2>Answers built for the next decision.</h2><a href="/guides/">VIEW ALL GUIDES →</a></div><div className="guide-list">{[["What to do after the tutorial","/guides/after-tutorial/","BEGINNER"],["When to stop looting and extract","/guides/extraction/","SURVIVAL"],["Choose the next Magnum upgrade","/world/magnum-ship/","SHIP"],["Keyboard controls and 1.0 changes","/controls/keyboard/","CONTROLS"]].map((g,i)=><a key={g[1]} href={g[1]}><span>{String(i+1).padStart(2,"0")}</span><b>{g[0]}</b><em>{g[2]}</em><i>↗</i></a>)}</div></section>

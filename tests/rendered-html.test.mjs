@@ -26,6 +26,8 @@ test("home renders the V2 task-first experience", async () => {
   assert.match(html, /"@type":"Organization"/);
   assert.match(html, /"@id":"https:\/\/quasimorphwiki\.com\/#organization"/);
   assert.doesNotMatch(html, /SearchAction/);
+  assert.match(html, /tactical-contract-640\.webp 640w/);
+  assert.match(html, /tactical-contract-960\.webp 960w/);
 });
 
 test("guides hub starts with the 1.0 route and has substantial navigation", async () => {
@@ -90,15 +92,4 @@ test("www host redirects to the canonical apex host", async () => {
   const response = await worker.fetch(new Request("https://www.quasimorphwiki.com/guides/?from=test"), env, { waitUntil() {}, passThroughOnException() {} });
   assert.equal(response.status, 308);
   assert.equal(response.headers.get("location"), "https://quasimorphwiki.com/guides/?from=test");
-});
-
-test("responsive image requests use the Cloudflare image transformer", async () => {
-  const imageEnv = {
-    ASSETS: { fetch: async () => new Response("source", { headers: { "content-type": "image/webp" } }) },
-    IMAGES: { input: () => ({ transform: () => ({ output: async () => ({ response: () => new Response("optimized", { headers: { "content-type": "image/webp" } }) }) }) }) },
-  };
-  const response = await worker.fetch(new Request("https://quasimorphwiki.com/_next/image?url=%2Fimages%2Fofficial%2Ftactical-contract.webp&w=640&q=75", { headers: { accept: "image/avif,image/webp" } }), imageEnv, { waitUntil() {}, passThroughOnException() {} });
-  assert.equal(response.status, 200);
-  assert.equal(response.headers.get("content-type"), "image/webp");
-  assert.equal(await response.text(), "optimized");
 });

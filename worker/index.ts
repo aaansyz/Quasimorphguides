@@ -43,7 +43,7 @@ const worker = {
       });
     }
 
-    if (["/_next/image", "/_next/image/", "/_vinext/image", "/_vinext/image/"].includes(url.pathname)) {
+    if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];
       return handleImageOptimization(request, {
         fetchAsset: (path) => env.ASSETS.fetch(new Request(new URL(path, request.url))),
