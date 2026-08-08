@@ -23,6 +23,9 @@ test("home renders the V2 task-first experience", async () => {
   assert.match(html, /82 Achievements/);
   assert.doesNotMatch(html, /ADVERTISEMENT \/\/ RESERVED/);
   assert.doesNotMatch(html, /googletagmanager\.com/);
+  assert.match(html, /"@type":"Organization"/);
+  assert.match(html, /"@id":"https:\/\/quasimorphwiki\.com\/#organization"/);
+  assert.doesNotMatch(html, /SearchAction/);
 });
 
 test("guides hub starts with the 1.0 route and has substantial navigation", async () => {
@@ -72,4 +75,19 @@ test("every indexable route is a self-canonical 200 page with one H1", async () 
     assert.ok(!titles.has(entry.title), `duplicate title: ${entry.title}`); titles.add(entry.title);
     assert.ok(!descriptions.has(entry.description), `duplicate description: ${entry.path}`); descriptions.add(entry.description);
   }
+});
+
+test("article schema uses the disclosed site organization as author and publisher", async () => {
+  const { html } = await render("/guides/getting-started/");
+  assert.match(html, /"@type":"Article"/);
+  assert.match(html, /"author":\{"@type":"Organization","@id":"https:\/\/quasimorphwiki\.com\/#organization","name":"Quasimorph Wiki"/);
+  assert.match(html, /"publisher":\{"@type":"Organization","@id":"https:\/\/quasimorphwiki\.com\/#organization","name":"Quasimorph Wiki"/);
+  assert.doesNotMatch(html, /"@type":"Person"/);
+  assert.doesNotMatch(html, /"@type":"FAQPage"/);
+});
+
+test("www host redirects to the canonical apex host", async () => {
+  const response = await worker.fetch(new Request("https://www.quasimorphwiki.com/guides/?from=test"), env, { waitUntil() {}, passThroughOnException() {} });
+  assert.equal(response.status, 308);
+  assert.equal(response.headers.get("location"), "https://quasimorphwiki.com/guides/?from=test");
 });
