@@ -91,3 +91,14 @@ test("www host redirects to the canonical apex host", async () => {
   assert.equal(response.status, 308);
   assert.equal(response.headers.get("location"), "https://quasimorphwiki.com/guides/?from=test");
 });
+
+test("responsive image requests use the Cloudflare image transformer", async () => {
+  const imageEnv = {
+    ASSETS: { fetch: async () => new Response("source", { headers: { "content-type": "image/webp" } }) },
+    IMAGES: { input: () => ({ transform: () => ({ output: async () => ({ response: () => new Response("optimized", { headers: { "content-type": "image/webp" } }) }) }) }) },
+  };
+  const response = await worker.fetch(new Request("https://quasimorphwiki.com/_next/image?url=%2Fimages%2Fofficial%2Ftactical-contract.webp&w=640&q=75", { headers: { accept: "image/avif,image/webp" } }), imageEnv, { waitUntil() {}, passThroughOnException() {} });
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get("content-type"), "image/webp");
+  assert.equal(await response.text(), "optimized");
+});
